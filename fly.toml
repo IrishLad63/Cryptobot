@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for cryptobot-cwmdya on 2025-05-24T23:31:11Z
+# fly.toml app configuration file generated for cryptobot-0goxla on 2025-05-24T23:38:14Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'cryptobot-cwmdya'
+app = 'cryptobot-0goxla'
 primary_region = 'dfw'
 
 [build]
