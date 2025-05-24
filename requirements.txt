@@ -1,1 +1,6 @@
-This is a placeholder for requirements.txt
+requests
+pandas
+numpy
+scikit-learn
+openai
+matplotlib
