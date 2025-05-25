@@ -1,7 +1,6 @@
 app = "cryptobot"
 
 [build]
-  builder = "heroku/buildpacks:20"
 
 [[services]]
   internal_port = 3000
