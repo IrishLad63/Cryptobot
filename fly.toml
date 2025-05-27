@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for cryptobot-f3gi5w on 2025-05-27T19:34:41Z
+# fly.toml app configuration file generated for cryptobot-aiz3zg on 2025-05-27T20:04:07Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'cryptobot-f3gi5w'
+app = 'cryptobot-aiz3zg'
 primary_region = 'dfw'
 
 [build]
