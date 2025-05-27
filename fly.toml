@@ -6,11 +6,11 @@ kill_timeout = 5
 [env]
   PORT = "3000"
 
+[build]
+  dockerfile = "Dockerfile"
+
 [experimental]
   auto_rollback = true
-
-[build]
-  builder = "Docker"
 
 [[services]]
   protocol = "tcp"
