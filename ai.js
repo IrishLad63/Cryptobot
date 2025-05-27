@@ -1,14 +1,16 @@
-// File: bot.js const candles = require("./candles"); const wallet = require("./wallet"); const ai = require("./ai"); const fs = require("fs"); const config = require("./config");
+// File: ai.js const OpenAI = require("openai");
 
-function logTrade(entry) { const trades = JSON.parse(fs.readFileSync("./trades.json", "utf-8")); trades.push(entry); fs.writeFileSync("./trades.json", JSON.stringify(trades, null, 2)); }
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-async function evaluateAndTrade() { const candleData = await candles.getCandles("MATIC"); const price = candleData[candleData.length - 1].close; const sentiment = await ai.getSentiment("MATIC"); const balance = await wallet.getMaticBalance(config.walletAddress);
+async function getSentiment(symbol) { const prompt = Analyze crypto news and social sentiment for ${symbol}. Provide a sentiment score between 0 (negative) and 1 (positive), and suggest a buy/sell threshold.;
 
-const shouldBuy = price < sentiment.buyThreshold && sentiment.sentimentScore > 0.6; const shouldSell = price > sentiment.sellThreshold && sentiment.sentimentScore < 0.4;
+const response = await openai.chat.completions.create({ model: "gpt-4", messages: [{ role: "user", content: prompt }], });
 
-if (config.status) { if (shouldBuy) { console.log("BUY SIGNAL"); logTrade({ type: "BUY", price, time: Date.now() }); config.totalGain += 2.5; } else if (shouldSell) { console.log("SELL SIGNAL"); logTrade({ type: "SELL", price, time: Date.now() }); config.totalGain += 1.2; } else { console.log("HOLD - No clear signal"); } } }
+const content = response.choices[0].message.content; const match = content.match(/score[:\s]+(\d.\d+).*buy[:\s]+(\d+).*sell[:\s]+(\d+)/i);
 
-function run() { setInterval(evaluateAndTrade, 60 * 1000); }
+return match ? { sentimentScore: parseFloat(match[1]), buyThreshold: parseFloat(match[2]), sellThreshold: parseFloat(match[3]), } : { sentimentScore: 0.5, buyThreshold: 0.5, sellThreshold: 0.5, }; }
 
-module.exports = { run };
+module.exports = { getSentiment };
+
+
 
