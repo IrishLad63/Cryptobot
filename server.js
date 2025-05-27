@@ -20,3 +20,5 @@ app.use(cors()); app.use(express.json()); app.use(express.static(path.join(__dir
 
 // Start server app.listen(PORT, "0.0.0.0", () => { console.log(CryptoBot backend running on port ${PORT}); });
 
+
+
