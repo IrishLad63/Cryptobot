@@ -1,23 +1,33 @@
-# fly.toml app configuration file generated for cryptobot-aiz3zg on 2025-05-27T20:04:07Z
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
+app = "clanceybot-clean"
 
-app = 'cryptobot-aiz3zg'
-primary_region = 'dfw'
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[env]
+  PORT = "3000"
+
+[experimental]
+  auto_rollback = true
 
 [build]
+  builder = "Docker"
 
-[http_service]
+[[services]]
+  protocol = "tcp"
   internal_port = 3000
-  force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+  auto_start = true
+  auto_stop = false
 
-[[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
-  cpus = 1
-  memory_mb = 1024
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [[services.tcp_checks]]
+    interval = 10000
+    timeout = 2000
+    grace_period = "5s"
+    restart_limit = 0
