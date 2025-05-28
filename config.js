@@ -1,2 +1,8 @@
-// File: config.js module.exports = { status: true, // bot is ON walletAddress: "0x15EE8eBf16A1D55F4da8aE27A4EeCc5c21230D8C", totalGain: 0.0, };
+// config.js
+
+module.exports = {
+  status: false, // Set to true to auto-start the bot on server boot
+  gain: 0,       // Initial gain percentage (you can update this dynamically)
+  walletAddress: "0x0000000000000000000000000000000000000000" // Replace with your actual wallet
+};
 
