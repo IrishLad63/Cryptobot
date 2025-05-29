@@ -1,26 +1,17 @@
-# Use official Node.js base image
 FROM node:18
 
-# Set working directory inside container
+# Create app directory
 WORKDIR /app
 
-# Copy package files first
+# Install app dependencies
 COPY package*.json ./
+RUN npm install --production
 
-# Install dependencies with legacy peer deps
-RUN npm install --legacy-peer-deps
-
-# Copy rest of the app
+# Bundle app source
 COPY . .
-
-# Build the frontend
-RUN cd frontend && npm install && npm run build
-
-# Set environment variable for production
-ENV NODE_ENV=production
 
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Start the backend server
+# Define the command to run your app
 CMD ["npm", "start"]
