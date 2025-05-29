@@ -1,8 +1,8 @@
-// config.js
+const { createClient } = require('@supabase/supabase-js');
 
-module.exports = {
-  status: false, // Set to true to auto-start the bot on server boot
-  gain: 0,       // Initial gain percentage (you can update this dynamically)
-  walletAddress: "0x0000000000000000000000000000000000000000" // Replace with your actual wallet
-};
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+module.exports = { supabase };
