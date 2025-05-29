@@ -1,18 +1,12 @@
 {
-  "name": "cryptobot",
+  "name": "clanceys-cryptobot",
   "version": "1.0.0",
-  "description": "Clancey's Crazy CryptoBot",
+  "description": "CryptoBot backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "engines": {
-    "node": "18.x"
-  },
   "dependencies": {
-    "express": "^4.18.2",
-    "axios": "^1.6.0",
-    "dotenv": "^16.3.1",
-    "@supabase/supabase-js": "^2.39.3"
+    "express": "^4.18.2"
   }
 }
