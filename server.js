@@ -1,21 +1,8 @@
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const config = require('./config');
+const { createClient } = require('@supabase/supabase-js');
 
-const PORT = process.env.PORT || 3000;
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
-app.get('/', async (req, res) => {
-  try {
-    const { data, error } = await config.supabase.from('trades').select('*');
-    if (error) throw error;
-    res.json({ status: 'CryptoBot online', trades: data });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Bot error');
-  }
-});
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-app.listen(PORT, () => {
-  console.log(`✅ CryptoBot running on port ${PORT}`);
-});
+module.exports = { supabase };
