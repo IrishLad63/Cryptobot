@@ -1,17 +1,17 @@
 FROM node:18
 
-# Create app directory
+# Set working directory
 WORKDIR /app
 
-# Install app dependencies
+# Install dependencies
 COPY package*.json ./
 RUN npm install --production
 
-# Bundle app source
+# Copy app source
 COPY . .
 
-# Expose the port the app runs on
+# Expose app port
 EXPOSE 3000
 
-# Define the command to run your app
+# Run the app
 CMD ["npm", "start"]
