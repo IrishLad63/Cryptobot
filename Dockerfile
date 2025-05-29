@@ -1,17 +1,18 @@
-FROM node:18
-
-# Set working directory
-WORKDIR /app
-
-# Install dependencies
-COPY package*.json ./
-RUN npm install --production
-
-# Copy app source
-COPY . .
-
-# Expose app port
-EXPOSE 3000
-
-# Run the app
-CMD ["npm", "start"]
+{
+  "name": "cryptobot",
+  "version": "1.0.0",
+  "description": "Clancey's Crazy CryptoBot",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "@supabase/supabase-js": "^2.39.3"
+  }
+}
