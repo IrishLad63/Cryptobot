@@ -1,21 +1,11 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
-const config = require('./config');
+const port = process.env.PORT || 3000;
 
-const PORT = process.env.PORT || 3000;
-
-app.get('/', async (req, res) => {
-  try {
-    const { data, error } = await config.supabase.from('trades').select('*');
-    if (error) throw error;
-    res.json({ status: 'CryptoBot is operational!', trades: data });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Bot error');
-  }
+app.get('/', (req, res) => {
+  res.send('Clancey’s Crazy CryptoBot is LIVE!');
 });
 
-app.listen(PORT, () => {
-  console.log(`✅ CryptoBot running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
