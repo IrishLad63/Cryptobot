@@ -1,21 +1,21 @@
-# Use Node 18 base image
+# Use official Node.js base image
 FROM node:18
 
-# Create app directory
+# Set working directory
 WORKDIR /app
 
-# Install backend dependencies
+# Copy package files and install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
-# Copy the rest of the app
+# Copy all app files
 COPY . .
 
-# Build the frontend
+# Build frontend
 RUN npm run build
 
-# Expose the port the app runs on
+# Expose port for Fly.io
 EXPOSE 3000
 
-# Start the server
-CMD ["npm", "start"]
+# Start backend server
+CMD ["node", "server.js"]
