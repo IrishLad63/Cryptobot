@@ -1,20 +1,28 @@
-Path: server.js
-
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-// Serve frontend build (for production)
+// --- Import and run the bot ---
+const { runBot } = require('./bot');
+runBot(); // runs once on startup
+
+// --- Serve frontend from 'dist' ---
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Catch-all route to frontend
+// --- API route to check bot status ---
+app.get('/api/status', (req, res) => {
+  res.json({ status: 'ClanceyBot is online 🚀', timestamp: new Date().toISOString() });
+});
+
+// --- Fallback route for frontend SPA ---
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// --- Start the server ---
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
 
 
