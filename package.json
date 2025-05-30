@@ -1,12 +1,38 @@
+🟩 FILE 2 of 14 — package.json
+
+This defines your dependencies (express, react, etc.) and tells Fly/Vite how to start the app.
+
+📁 Path: package.json
+
 {
   "name": "clanceys-cryptobot",
   "version": "1.0.0",
-  "description": "CryptoBot backend",
+  "description": "Full CryptoBot app with backend and frontend",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0",
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.24"
   }
 }
+
+
+---
+
+✔️ Includes frontend and backend tools
+✔️ Set up to build and serve the dashboard
+
+Next: Dockerfile — to containerize the full app for Fly.io.
+
