@@ -1,7 +1,3 @@
-🟩 FILE 2 of 14 — package.json
-
-This defines your dependencies (express, react, etc.) and tells Fly/Vite how to start the app.
-
 📁 Path: package.json
 
 {
