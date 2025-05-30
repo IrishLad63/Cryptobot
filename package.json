@@ -1,5 +1,3 @@
-📁 Path: package.json
-
 {
   "name": "clanceys-cryptobot",
   "version": "1.0.0",
@@ -23,12 +21,4 @@
     "postcss": "^8.4.24"
   }
 }
-
-
----
-
-✔️ Includes frontend and backend tools
-✔️ Set up to build and serve the dashboard
-
-Next: Dockerfile — to containerize the full app for Fly.io.
 
