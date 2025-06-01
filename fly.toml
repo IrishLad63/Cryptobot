@@ -1,16 +1,19 @@
-app = "clanceys-cryptobot"
-
-[build]
-  builder = "Docker"
+app = "cryptobot"
 
 [env]
   PORT = "3000"
+
+[experimental]
+  auto_rollback = true
 
 [[services]]
   internal_port = 3000
   protocol = "tcp"
 
   [[services.ports]]
+    handlers = ["http"]
     port = 80
+
   [[services.ports]]
+    handlers = ["tls", "http"]
     port = 443
