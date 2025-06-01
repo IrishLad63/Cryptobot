@@ -1,26 +1,21 @@
-const config = require('./config');
-
-function analyzeMarket() {
-  // Simulated logic (replace with real analysis later)
-  const random = Math.random();
-  return random > 0.5 ? 'BUY' : 'SELL';
-}
-
-function executeTrade(signal) {
-  console.log(`Executing ${signal} trade...`);
-  // In real bot, this is where API call to exchange would go
-  return { success: true, signal, amount: config.trading.tradeAmount };
-}
+let currentPlatform = 'uniswap';
+let lastAction = 'Initialized';
 
 function runBot() {
-  if (!config.trading.enabled) {
-    console.log('Trading is disabled in config.');
-    return;
-  }
-
-  const signal = analyzeMarket();
-  const result = executeTrade(signal);
-  console.log(`Trade result:`, result);
+  setInterval(() => {
+    const decision = Math.random() > 0.5 ? 'BUY' : 'SELL';
+    lastAction = `${decision} via ${currentPlatform}`;
+    console.log('Trade Signal:', lastAction);
+  }, 10000);
 }
 
-module.exports = { runBot };
+function setPlatform(name) {
+  currentPlatform = name;
+  console.log('Trading platform set to:', name);
+}
+
+function getLastAction() {
+  return lastAction;
+}
+
+module.exports = { runBot, setPlatform, getLastAction };
