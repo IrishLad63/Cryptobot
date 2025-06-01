@@ -2,25 +2,33 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const { runBot, setPlatform, getLastAction } = require('./bot');
 
-// --- Import and run the bot ---
-const { runBot } = require('./bot');
-runBot(); // runs once on startup
+let performance = '0%';
 
-// --- Serve frontend from 'dist' ---
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.json());
 
-// --- API route to check bot status ---
+runBot();
+
 app.get('/api/status', (req, res) => {
-  res.json({ status: 'ClanceyBot is online 🚀', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'Running',
+    lastAction: getLastAction(),
+    performance
+  });
 });
 
-// --- Fallback route for frontend SPA ---
+app.post('/api/platform', (req, res) => {
+  const { platform } = req.body;
+  setPlatform(platform);
+  res.json({ success: true });
+});
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-// --- Start the server ---
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
