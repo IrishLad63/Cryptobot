@@ -1,21 +1,18 @@
-# Build stage
-FROM node:20-alpine AS build
+# Use official Node.js image
+FROM node:20-alpine
+
 WORKDIR /app
+
+# Install dependencies
 COPY package*.json ./
-RUN npm ci
+RUN npm install
+
+# Copy all files and build the Vite app
 COPY . .
 RUN npm run build
 
-# Production stage
-FROM node:20-alpine
-WORKDIR /app
-ENV NODE_ENV=production
+# Expose the port Fly sets (default 8080)
+EXPOSE 8080
 
-COPY package*.json ./
-RUN npm ci --omit=dev
-
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/server.js ./server.js
-
-EXPOSE 3000
+# Start the server
 CMD ["node", "server.js"]
