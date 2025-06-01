@@ -1,4 +1,10 @@
-node_modules
-dist
-.env
-.DS_Store
+.gitignore
+Dockerfile
+fly.toml
+package.json
+postcss.config.js
+server.js
+tailwind.config.js
+bot.js
+config.js      ← optional (keep only if using)
+README.md      ← optional
