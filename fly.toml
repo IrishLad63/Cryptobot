@@ -1,5 +1,3 @@
-# fly.toml app configuration file for cryptobot-yjfjpw
-
 app = "cryptobot-yjfjpw"
 primary_region = "dfw"
 
