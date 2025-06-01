@@ -1,20 +1,17 @@
-{
-  "name": "cryptobot-vite-app",
-  "version": "1.0.0",
-  "description": "A Vite app with a custom Node (Express) server for Fly.io deployment.",
-  "main": "server.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.19.2"
-  },
-  "devDependencies": {
-    "vite": "^5.2.0"
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  }
-}
+const express = require("express");
+const path = require("path");
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Serve static files from the Vite dist directory
+app.use(express.static(path.join(__dirname, "dist")));
+
+// For SPA: serve index.html on all non-file routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
