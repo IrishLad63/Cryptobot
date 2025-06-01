@@ -1,7 +1,7 @@
 {
   "name": "cryptobot-vite-app",
   "version": "1.0.0",
-  "description": "A Vite app with custom Node (Express) server for Fly.io deployment.",
+  "description": "A Vite app with a custom Node (Express) server for Fly.io deployment.",
   "main": "server.js",
   "scripts": {
     "dev": "vite",
@@ -16,13 +16,5 @@
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "keywords": [
-    "vite",
-    "express",
-    "fly.io",
-    "node"
-  ],
-  "author": "",
-  "license": "MIT"
+  }
 }
