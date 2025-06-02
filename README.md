@@ -1,1 +1,3 @@
-This is a placeholder for README.md
+Clancey's Crazy Cryptobot
+   
+   Time to Even it Up
